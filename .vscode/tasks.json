@@ -1,0 +1,60 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Watch App",
+			"script": "watch-app",
+			"type": "npm",
+			"isBackground": true,
+			"problemMatcher": [
+				{
+					"owner": "webpack",
+					"severity": "error",
+					"fileLocation": "absolute",
+					"pattern": [
+						{
+							"regexp": "^\\[tsl\\] ERROR in ([^\\(]*)\\((\\d+),(\\d+\\))$",
+							"file" : 1,
+							"line": 2,
+							"column": 3
+						},
+						{
+							"regexp": "TS\\d+: (.*)$",
+							"message": 1,
+						},
+					],
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": "^Time: \\d+ms$",
+						"endsPattern": "^EOL$"
+					}
+				},
+				{
+					"owner": "webpack",
+					"severity": "error",
+					"fileLocation": "relative",
+					"pattern": [
+						{
+							"regexp": "^ERROR in (.*)$",
+							"file" : 1,
+						},
+						{
+							"regexp": "^.*"
+						},
+						{
+							"regexp": "^\\[(\\d+), (\\d+)]: (.*)$",
+							"line": 1,
+							"column": 2,
+							"message": 3,
+						},
+					],
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": "^Time: \\d+ms$",
+						"endsPattern": "^EOL$"
+					}
+				},
+			]
+		}
+	]
+}
