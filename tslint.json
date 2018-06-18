@@ -7,7 +7,10 @@
     "rules": {
         "indent": [true, "tabs"],
         "typedef": false,
-        "no-require-imports": false
+        "no-require-imports": false,
+        "no-null-keyword": false,
+        "no-default-export": false,
+        "completed-docs": false // TODO: Enable
     },
     "rulesDirectory": []
 }

@@ -1,4 +1,8 @@
 {
 	"editor.insertSpaces": false,
-	"react-native-tools.projectRoot": "./app"
+	"react-native-tools.projectRoot": "./app",
+	"typescript.preferences.quoteStyle": "double",
+	"files.exclude": {
+		"**/node_modules/": true,
+	}
 }

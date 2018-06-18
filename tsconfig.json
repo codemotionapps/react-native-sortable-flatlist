@@ -5,6 +5,7 @@
 		"declarationDir": "../types"
 	},
 	"exclude": [
-		"app"
+		"app",
+		"node_modules"
 	]
 }

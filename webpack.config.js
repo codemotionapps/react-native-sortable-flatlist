@@ -13,7 +13,7 @@ const baseConfig = {
 					{
 						loader: `tslint-loader`,
 						options: {
-							failOnHint: true,
+							// failOnHint: true,
 							emitErrors: true,
 							typeCheck: true,
 						},
@@ -33,6 +33,15 @@ const baseConfig = {
 		react: `commonjs react`,
 		"react-native": `commonjs react-native`,
 	},
+	plugins: [
+		{
+			apply(compiler){
+				compiler.hooks.beforeCompile.tap({name: `SOL`}, () => {
+					console.log(`SOL`);
+				});
+			},
+		},
+	],
 	output: {
 		filename: `index.js`,
 		path: path.resolve(__dirname, `dist`),
@@ -46,6 +55,7 @@ appConfig.output = {
 	filename: `index.js`,
 	path: path.resolve(__dirname, `app`, `dist`),
 };
+appConfig.plugins = baseConfig.plugins;
 appConfig.module.rules[0].test = /\.tsx?$/;
 appConfig.module.rules[0].use[1].options.tsConfigFile = `app/tsconfig.json`;
 

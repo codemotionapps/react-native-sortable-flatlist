@@ -10,6 +10,7 @@
 				{
 					"owner": "webpack",
 					"severity": "error",
+					"source": "webpack:typescript",
 					"fileLocation": "absolute",
 					"pattern": [
 						{
@@ -19,19 +20,21 @@
 							"column": 3
 						},
 						{
-							"regexp": "TS\\d+: (.*)$",
-							"message": 1,
+							"regexp": "TS(\\d+): (.*)$",
+							"message": 2,
+							"code": 1
 						},
 					],
 					"background": {
 						"activeOnStart": true,
-						"beginsPattern": "^Time: \\d+ms$",
+						"beginsPattern": "^SOL$",
 						"endsPattern": "^EOL$"
 					}
 				},
 				{
 					"owner": "webpack",
 					"severity": "error",
+					"source": "webpack:tslint",
 					"fileLocation": "relative",
 					"pattern": [
 						{
@@ -46,11 +49,12 @@
 							"line": 1,
 							"column": 2,
 							"message": 3,
+							"loop": true
 						},
 					],
 					"background": {
 						"activeOnStart": true,
-						"beginsPattern": "^Time: \\d+ms$",
+						"beginsPattern": "^SOL$",
 						"endsPattern": "^EOL$"
 					}
 				},
