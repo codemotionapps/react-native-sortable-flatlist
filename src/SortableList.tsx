@@ -11,12 +11,11 @@ import { ILayout } from "./util/ILayout";
 import { IItem, ISortableListProps } from "./util/ISortableListProps";
 // Import noop = require("./util/noop");
 
-export = class SortableList extends React.Component<ISortableListProps> {
+export default class SortableList extends React.Component<ISortableListProps> {
 	private readonly layouts: {[key: string]: ILayout} = {};
+	private readonly rowRefs: {[key: string]: React.RefObject<View>} = {};
 
 	public render() {
-		// tslint:disable-next-line
-		console.log(this.props.context);
 		const props = {
 			...this.props,
 			renderItem: this.renderItem.bind(this),
@@ -36,14 +35,31 @@ export = class SortableList extends React.Component<ISortableListProps> {
 	private handleLongPress(info: ListRenderItemInfo<IItem>) {
 		const { context, renderItem } = this.props;
 
-		context.setActiveRow(renderItem(info), this.layouts[info.item.key]);
+		const { key } = info.item;
+		context.setActiveRow(
+			renderItem(info),
+			this.layouts[key],
+			this.rowRefs[key].current as View,
+		);
 	}
 
-	private renderItem(info) {
-		return <TouchableHighlight onLongPress={this.handleLongPress.bind(this, info)}>
-			<View onLayout={this.handleLayout.bind(this, info)}>
+	private renderItem(info: ListRenderItemInfo<IItem>) {
+		const ref: React.RefObject<View> = (
+			this.rowRefs[info.item.key] || (this.rowRefs[info.item.key] = React.createRef<View>())
+		);
+
+		const handleLongPress = () => {
+			this.handleLongPress(info);
+		};
+
+		const handleLayout = (event: LayoutChangeEvent) => {
+			this.handleLayout(info, event);
+		};
+
+		return <TouchableHighlight onLongPress={handleLongPress}>
+			<View onLayout={handleLayout} ref={ref}>
 				{this.props.renderItem(info)}
 			</View>
 		</TouchableHighlight>;
 	}
-};
+}

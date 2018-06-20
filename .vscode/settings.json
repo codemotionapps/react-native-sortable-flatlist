@@ -3,6 +3,9 @@
 	"react-native-tools.projectRoot": "./app",
 	"typescript.preferences.quoteStyle": "double",
 	"files.exclude": {
-		"**/node_modules/": true,
+		"**/node_modules": true
+	},
+	"files.associations": {
+		"index.bundle": "javascript"
 	}
 }

@@ -1,14 +1,12 @@
 import React = require("react");
-import { ListRenderItemInfo, StyleSheet, Text, View } from "react-native";
+import { ListRenderItemInfo, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { SortableContext, SortableList } from "../../src/index";
 
 const styles = StyleSheet.create({
 	container: {
-		alignItems: "center",
 		backgroundColor: "#000",
 		flex: 1,
-		justifyContent: "center",
 		padding: 40,
 	},
 	item: {
@@ -21,11 +19,12 @@ const styles = StyleSheet.create({
 		padding: 5,
 	},
 	list: {
-		backgroundColor: "#303030",
+		backgroundColor: "#818181",
+		margin: 5,
 		width: 250,
 	},
 	listsContainer: {
-		backgroundColor: "#191919",
+		backgroundColor: "#4c4c4c",
 	},
 });
 
@@ -43,18 +42,23 @@ const renderItem = (
 		<Text>Item {id}</Text>
 	</View>;
 
-const data: IItem[] = [];
+const data: IItem[][] = [];
 
 // tslint:disable-next-line no-magic-numbers
-for (let i = 0; i < 200; i++) {
+for (let i = 0; i < 10; i++) {
+	const currentList: IItem[] = [];
+	data.push(currentList);
 	// tslint:disable-next-line no-magic-numbers
-	const height = (Math.random() * 50) + 25;
-	const iAsString = i.toString();
-	data.push({
-		height,
-		id: iAsString,
-		key: iAsString,
-	});
+	for (let j = 0; j < 200; j++) {
+		// tslint:disable-next-line no-magic-numbers
+		const height = (Math.random() * 50) + 25;
+		const iAsString = j.toString();
+		currentList.push({
+			height,
+			id: iAsString,
+			key: iAsString,
+		});
+	}
 }
 
 export = class App extends React.Component {
@@ -62,11 +66,16 @@ export = class App extends React.Component {
 	public render() {
 		return <View style={styles.container}>
 			<SortableContext>
-				<SortableList
-					style={styles.list}
-					data={data}
-					renderItem={renderItem}
-				/>
+				<ScrollView horizontal style={styles.listsContainer}>
+					{data.map((list, index) =>
+						<SortableList
+							key={index}
+							style={styles.list}
+							data={list}
+							renderItem={renderItem}
+						/>,
+					)}
+				</ScrollView>
 			</SortableContext>
 		</View>;
 	}

@@ -10,6 +10,7 @@
         "no-require-imports": false,
         "no-null-keyword": false,
         "no-default-export": false,
+        "strict-boolean-expressions": false,
         "completed-docs": false // TODO: Enable
     },
     "rulesDirectory": []

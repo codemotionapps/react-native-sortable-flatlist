@@ -22,6 +22,17 @@
 			"outDir": "${workspaceRoot}/.vscode/.react"
 		},
 		{
+			"name": "Debug iOS on device",
+			"program": "${workspaceRoot}/.vscode/launchReactNative.js",
+			"type": "reactnative",
+			"request": "launch",
+			"platform": "ios",
+			"target": "device",
+			"sourceMaps": true,
+			"preLaunchTask": "Watch App",
+			"outDir": "${workspaceRoot}/.vscode/.react"
+		},
+		{
 			"name": "Attach to packager",
 			"program": "${workspaceRoot}/.vscode/launchReactNative.js",
 			"type": "reactnative",

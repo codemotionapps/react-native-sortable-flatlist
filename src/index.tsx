@@ -1,2 +1,10 @@
-export import SortableList = require("./ContextConsumer");
-export import SortableContext = require("./SortableContext");
+import ContextConsumer from "./ContextConsumer";
+import SortableContext from "./SortableContext";
+
+// tslint:disable-next-line variable-name
+const SortableList = ContextConsumer;
+
+export {
+	SortableContext,
+	SortableList,
+};
